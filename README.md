@@ -1,4 +1,4 @@
-# face-blur
+# Face Blur
 Node utility to recognise and remove faces from image files.
 
 # Executing
