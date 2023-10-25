@@ -1,14 +1,20 @@
-const cv = require('opencv4nodejs');
-const jimp = require("jimp");
+import * as cv from "opencv4nodejs";
+import * as jimp from "jimp";
 
-module.exports = {
+export type Rect = {
+    x: number;
+    y: number;
+    width: number;
+    height: number;
+};
 
+export default {
 
-    readImage(path) {
-        return cv.imreadAsync(path).then(img => img.bgrToGrayAsync());
+    readImage(path: string) {
+        return cv.imreadAsync(path).then((img: any) => img.bgrToGrayAsync());
     },
 
-    async hideFromImage(file, regions) {
+    async hideFromImage(file: string, regions: Rect[]) {
         regions = regions.slice();
         let image = await jimp.read(file);
 
@@ -19,7 +25,7 @@ module.exports = {
         return image;
     },
     
-    async detectFaceInFiles(files) {
+    async detectFaceInFiles(files: string[]) {
         const classifier = new cv.CascadeClassifier(cv.HAAR_FRONTALFACE_ALT2);
         const result = [];
 
